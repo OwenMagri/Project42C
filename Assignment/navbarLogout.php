@@ -17,10 +17,7 @@
         <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="register.php">Register</a>
+                    <a class="nav-link" href="logout.php">Logout</a>
                 </li>
             </ul>
         </form>

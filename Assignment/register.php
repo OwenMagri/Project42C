@@ -10,51 +10,81 @@
 </head>
 <body background="images/background.jpeg">
     <?php require_once("navbar.php"); ?>
+    <?php require_once("connection.php"); ?>
     <div class="container">
             <div class="jumbotron mt-5">
             <h2 class="display-4">Register Account</h2>
-                <form class="mt-4">
+                <form class="mt-4" method="post" action="register.php">
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="First Name">
+                            <input type="text" class="form-control" name="name" placeholder="First Name">
                         </div>
                         <div class="form-group col-md-6">
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Last Name">
+                            <input type="text" class="form-control" name="surname" placeholder="Last Name">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                            <small id="emailHelp" class="form-text text-muted">This will be your login details</small>
+                            <input type="email" class="form-control" name="email" placeholder="Email">
+                            <small class="form-text text-muted">This will be your login details</small>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <input type="password" class="form-control" name="password" placeholder="Password">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Address Line 1">
+                            <input type="text" class="form-control" name="address" placeholder="Address Line 1">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Phone Number">
+                            <input type="text" class="form-control" name="phone" placeholder="Phone Number">
                         </div>
                         <div class="form-group col-md-4">
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="City">
+                            <input type="text" class="form-control" name="city" placeholder="City">
                         </div>
                         <div class="form-group col-md-4">
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Country">
+                            <input type="text" class="form-control" name="country" placeholder="Country">
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary btn-lg btn-block mt-4">SUBMIT</button>
+                    <input type="submit" name="submit" class="btn btn-primary btn-lg btn-block mt-4" value="SUBMIT"/>
+                    <div id="error" style="color:red;font-size:20px;"></div>
                     <a role="button" href="login.php" class="btn btn-danger btn-lg btn-block mt-4">ALREADY HAVE AN ACCOUNT?</a>
                 </form>
             </div>
         </div>
-    
+
+        <?php 
+            if(isset($_POST['submit'])){
+                $name = $_POST['name'];
+                $surname = $_POST['surname'];
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                $address = $_POST['address'];
+                $phone = $_POST['phone'];
+                $city = $_POST['city'];
+                $country = $_POST['country'];
+
+                if ((!empty($name)) && (!empty($surname)) && (!empty($email)) && (!empty($password)) && (!empty($address))
+                && (!empty($phone)) && (!empty($city)) && (!empty($country))){
+
+                    $conn = connectToMySQL();
+
+                    $query = "INSERT INTO tbl_client (name, surname, email, password, address, phone, city, country)
+                    VALUES ('$name', '$surname', '$email', '$password', '$address', '$phone', '$city', '$country')";
+
+                    $result = mysqli_query($conn, $query)
+                    or die("Error in query: ". mysqli_error($conn));
+                }else{
+                    echo "<script type='text/javascript'>";
+                    echo "document.getElementById('error').innerHTML = 'Please fill in all the fields'";
+                    echo "</script>";
+                }
+            }
+        ?>
 
 
 

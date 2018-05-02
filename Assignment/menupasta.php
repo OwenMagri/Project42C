@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +12,7 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body background="images/background.jpeg">
-<?php require_once("navbar.php"); ?>
+<?php if(!isset($_SESSION['email']))require_once("navbar.php");else require_once("navbarLogout.php"); ?>
 <div class="container">
         <div class="row">
             <div class="col" id="col1">
