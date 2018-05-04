@@ -17,29 +17,32 @@
         <div class="row">
             <div class="col" id="col1">
                 <a role="button" class="btn btn-info mt-4" href="menu.php">Back to Menu</a>
-                <div class="p-3">
-                    <h3>COCA-COLA</h3>
-                    <h4>€1.50</h4>
+                <div class="p-3 mt-4">
+                    <h4 class="text-info"3>COCA-COLA</h3>
+                    <h4 class="text-danger">€1.50</h4>
                     <p>0.5L</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER COCA-COLA</button>
                 </div>
                 <div class="p-3">
-                    <h3>FANTA</h3>
-                    <h4>€1.50</h4>
+                    <h3 class="text-info">FANTA</h3>
+                    <h4 class="text-danger">€1.50</h4>
                     <p>0.5L</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER FANTA</button>
                 </div>
                 <div class="p-3">
-                    <h3>SPRITE</h3>
-                    <h4>€1.50</h4>
+                    <h3 class="text-info">SPRITE</h3>
+                    <h4 class="text-danger">€1.50</h4>
                     <p>0.5L</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER SPRITE</button>
                 </div>
                 <div class="p-3">
-                    <h3>CISK</h3>
-                    <h4>€2.00</h4>
-                    <p>0.33L</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER CISK</button>
+                    <h3 class="text-info">CISK</h3>
+                    <h4 class="text-danger">€2.00</h4>
+                    <p>0.33L</p><br/><br/>
+                    <?php 
+                        if(isset($_SESSION['email'])){
+                            echo "<a role='button' href='shoppingcart.php' class='btn btn-primary btn-lg btn-block'>ORDER BEVERAGE</a>";
+                        }else{
+                            echo "<a role='button' href='login.php' class='btn btn-primary btn-lg btn-block'>LOGIN TO ORDER</a>";
+                        }
+                    ?>
                 </div>
                 
             </div>

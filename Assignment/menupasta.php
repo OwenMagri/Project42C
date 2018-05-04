@@ -17,29 +17,32 @@
         <div class="row">
             <div class="col" id="col1">
                 <a role="button" class="btn btn-info mt-4" href="menu.php">Back to Menu</a>
-                <div class="p-3">
-                    <h3>CARBONARA</h3>
-                    <h4>€5.50</h4>
+                <div class="p-3 mt-4">
+                    <h3 class="text-info">CARBONARA</h3>
+                    <h4 class="text-danger">€5.50</h4>
                     <p>Onions, Bacon, Egg Yolk, Cream and Parsley</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER CARBONARA</button>
                 </div>
                 <div class="p-3">
-                    <h3>BOLOGNESE</h3>
-                    <h4>€5.00</h4>
+                    <h3 class="text-info">BOLOGNESE</h3>
+                    <h4 class="text-danger">€5.00</h4>
                     <p>Onions, Garlic, Minced Beef, Tomato Sauce and Parsley</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER BOLOGNESE</button>
                 </div>
                 <div class="p-3">
-                    <h3>TORTELLINI</h3>
-                    <h4>€5.50</h4>
+                    <h3 class="text-info">TORTELLINI</h3>
+                    <h4 class="text-danger">€5.50</h4>
                     <p>Cream, Mushrooms, Onion, Garlic and Bacon</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER TORTELLINI</button>
                 </div>
                 <div class="p-3">
-                    <h3>LASAGNE</h3>
-                    <h4>€5.50</h4>
-                    <p>Home Made Bolognese, White Sauce and Grated Cheese</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER LASAGNE</button>
+                    <h3 class="text-info">LASAGNE</h3>
+                    <h4 class="text-danger">€5.50</h4>
+                    <p>Home Made Bolognese, White Sauce and Grated Cheese</p><br/><br/>
+                    <?php 
+                        if(isset($_SESSION['email'])){
+                            echo "<a role='button' href='shoppingcart.php' class='btn btn-primary btn-lg btn-block'>ORDER PASTA</a>";
+                        }else{
+                            echo "<a role='button' href='login.php' class='btn btn-primary btn-lg btn-block'>LOGIN TO ORDER</a>";
+                        }
+                    ?>
                 </div>
                 
             </div>

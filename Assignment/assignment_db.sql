@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: May 02, 2018 at 07:43 PM
+-- Generation Time: May 04, 2018 at 04:39 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -48,6 +48,41 @@ INSERT INTO `tbl_client` (`clientId`, `name`, `surname`, `email`, `password`, `a
 (1, 'Owen', 'Magri', 'testemail@gmail.com', 'pass1234', '40, Random Address', 12345678, 'Mosta', 'Malta'),
 (2, 'Jake', 'Salerno', 'salerno@gmail.com', '1234password', '40, address', 21345678, 'Pieta', 'Malta');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_product`
+--
+
+CREATE TABLE `tbl_product` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `price` float(10,2) NOT NULL,
+  `img` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_product`
+--
+
+INSERT INTO `tbl_product` (`id`, `name`, `price`, `img`) VALUES
+(1, 'Margherita', 5.30, 'margherita.jpg'),
+(2, 'Pepperoni', 7.50, 'pepperoni.jpg'),
+(3, 'Funghi', 6.30, 'funghi.jpg'),
+(4, 'Rucola', 7.50, 'rucola.jpg'),
+(5, 'Chicken Wrap', 4.00, 'chickenwrap.jpg'),
+(6, 'Bacon Wrap', 4.00, 'baconwrap.jpg'),
+(7, 'Veggie Wrap', 4.00, 'veggiewrap.jpg'),
+(8, 'Meat Wrap', 4.00, 'meatwrap.jpeg'),
+(9, 'Carbonara', 5.50, 'carbonara.jpg'),
+(10, 'Bolognese', 5.00, 'bolognese.jpg'),
+(11, 'Tortellini', 5.50, 'tortellini.jpeg'),
+(12, 'Lasagne', 5.50, 'lasagne.jpg'),
+(13, 'Coca-Cola', 1.50, 'coca.jpg'),
+(14, 'Fanta', 1.50, 'fanta.jpg'),
+(15, 'Sprite', 1.50, 'sprite.jpg'),
+(16, 'Cisk', 2.00, 'cisk.jpg');
+
 --
 -- Indexes for dumped tables
 --
@@ -59,6 +94,12 @@ ALTER TABLE `tbl_client`
   ADD PRIMARY KEY (`clientId`);
 
 --
+-- Indexes for table `tbl_product`
+--
+ALTER TABLE `tbl_product`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -67,6 +108,12 @@ ALTER TABLE `tbl_client`
 --
 ALTER TABLE `tbl_client`
   MODIFY `clientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_product`
+--
+ALTER TABLE `tbl_product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

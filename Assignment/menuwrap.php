@@ -17,29 +17,32 @@
         <div class="row">
             <div class="col" id="col1">
                 <a role="button" class="btn btn-info mt-4" href="menu.php">Back to Menu</a>
-                <div class="p-3">
-                    <h3>CHICKEN WRAP</h3>
-                    <h4>€4.00</h4>
+                <div class="p-3 mt-4">
+                    <h3 class="text-info">CHICKEN WRAP</h3>
+                    <h4 class="text-danger">€4.00</h4>
                     <p>Southern Fried Chicken, Coleslaw, Fresh Tomatoes, Melted Cheese, Mayo and BBQ Sauce</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER CHICKEN WRAP</button>
                 </div>
                 <div class="p-3">
-                    <h3>BACON WRAP</h3>
-                    <h4>€4.00</h4>
+                    <h3 class="text-info">BACON WRAP</h3>
+                    <h4 class="text-danger">€4.00</h4>
                     <p>Fried Egg, Melted Cheese, Coleslaw, Onions, Fresh Tomato and Mayo</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER BACON WRAP</button>
                 </div>
                 <div class="p-3">
-                    <h3>VEGGIE WRAP</h3>
-                    <h4>€4.00</h4>
+                    <h3 class="text-info">VEGGIE WRAP</h3>
+                    <h4 class="text-danger">€4.00</h4>
                     <p>Fresh Tomato, Onions, Peppers, Mushrooms, Coleslaw, Marrows, Aubergines and Melted Cheese</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER VEGGIE WRAP</button>
                 </div>
                 <div class="p-3">
-                    <h3>MEAT WRAP</h3>
-                    <h4>€4.00</h4>
-                    <p>Fresh Meat, Fried Onion, Mozzarella, Coleslaw and BBQ Sauce</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER MEAT WRAP</button>
+                    <h3 class="text-info">MEAT WRAP</h3>
+                    <h4 class="text-danger">€4.00</h4>
+                    <p>Fresh Meat, Fried Onion, Mozzarella, Coleslaw and BBQ Sauce</p><br/><br/>
+                    <?php 
+                        if(isset($_SESSION['email'])){
+                            echo "<a role='button' href='shoppingcart.php' class='btn btn-primary btn-lg btn-block'>ORDER WRAP</a>";
+                        }else{
+                            echo "<a role='button' href='login.php' class='btn btn-primary btn-lg btn-block'>LOGIN TO ORDER</a>";
+                        }
+                    ?>
                 </div>
                 
             </div>

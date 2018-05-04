@@ -17,29 +17,33 @@
         <div class="row">
             <div class="col" id="col1">
                 <a role="button" class="btn btn-info mt-4" href="menu.php">Back to Menu</a>
-                <div class="p-3">
-                    <h3>MARGHERITA</h3>
-                    <h4>€5.30</h4>
+                <div class="p-3 mt-4">
+                    <h3 class="text-info">MARGHERITA</h3>
+                    <h4 class="text-danger">€5.30</h4>
                     <p>Tomato Sauce, mozzarella, oregano.</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER MARGHERITA</button>
                 </div>
                 <div class="p-3">
-                    <h3>FUNGHI</h3>
-                    <h4>€6.30</h4>
+                    <h3 class="text-info">FUNGHI</h3>
+                    <h4 class="text-danger">€6.30</h4>
                     <p>Tomato sauce, mozzarella, mushrooms and oregano.</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER FUNGHI</button>
                 </div>
                 <div class="p-3">
-                    <h3>PEPPERONI</h3>
-                    <h4>€7.50</h4>
+                    <h3 class="text-info">PEPPERONI</h3>
+                    <h4 class="text-danger">€7.50</h4>
                     <p>Tomato sauce, mozzarella, pepperoni, jalapeno peppers, oregano.</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER PEPPERONI</button>
                 </div>
                 <div class="p-3">
-                    <h3>RUCOLA</h3>
-                    <h4>€7.50</h4>
-                    <p>Tomato sauce, mozzarella, parma ham, rucola and parmesan shavings.</p>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ORDER RUCOLA</button>
+                    <h3 class="text-info">RUCOLA</h3>
+                    <h4 class="text-danger">€7.50</h4>
+                    <p>Tomato sauce, mozzarella, parma ham, rucola and parmesan shavings.</p><br/></br>
+                    <?php 
+                        if(isset($_SESSION['email'])){
+                            echo "<a role='button' href='shoppingcart.php' class='btn btn-primary btn-lg btn-block'>ORDER PIZZA</a>";
+                        }else{
+                            echo "<a role='button' href='login.php' class='btn btn-primary btn-lg btn-block'>LOGIN TO ORDER</a>";
+                        }
+                    ?>
+                    
                 </div>
                 
             </div>
