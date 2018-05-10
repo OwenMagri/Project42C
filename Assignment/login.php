@@ -59,6 +59,20 @@
 
                     if($count > 0){
                         $_SESSION['email'] = $email;
+
+                        $conn = connectToMySQL();
+
+                        $query = "select clientId from tbl_client
+                            where email = '$email' and password = '$password'";
+
+                        $result = mysqli_query($conn,$query)
+                        or die("Error in query: ".mysqli_error($conn));
+
+                        $row = mysqli_fetch_row($result);
+                        $id = $row[0];
+                        
+                        $_SESSION['id'] = $id;
+
                         header("Location: index.php"); 
 
                     }else{

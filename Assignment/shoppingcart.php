@@ -1,5 +1,6 @@
 <?php 
 session_start();
+ob_start();//Used to avoid headers error
 require_once("connection.php");
 $conn = connectToMySQL();
 if(isset($_POST["add_to_cart"]))  
@@ -27,15 +28,15 @@ if(isset($_POST["add_to_cart"]))
       else  
       {  
            $item_array = array(  
-                'item_id'               =>     $_GET["id"],  
-                'item_name'               =>     $_POST["hidden_name"],  
+                'item_id'             =>     $_GET["id"],  
+                'item_name'           =>     $_POST["hidden_name"],  
                 'item_price'          =>     $_POST["hidden_price"],  
-                'item_quantity'          =>     $_POST["quantity"]  
+                'item_quantity'       =>     $_POST["quantity"]  
            );  
            $_SESSION["shopping_cart"][0] = $item_array;  
       }  
  }
- if(isset($_GET["action"]))  
+ if(isset($_GET["action"]))
  {  
       if($_GET["action"] == "delete")  
       {  
@@ -92,7 +93,8 @@ if(isset($_POST["add_to_cart"]))
         }  
         ?>
         <h3>Order Details</h3>  
-        <div class="table-responsive">  
+        <div class="table-responsive"> 
+        <form  method="post" action="shoppingcart.php"> 
                 <table class="table table-bordered">  
                     <tr>  
                         <th width="40%">Item Name</th>  
@@ -116,22 +118,48 @@ if(isset($_POST["add_to_cart"]))
                         <td><a href="shoppingcart.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>  
                     </tr>  
                     <?php  
-                            $total = $total + ($values["item_quantity"] * $values["item_price"]);  
+                            $total = $total + ($values["item_quantity"] * $values["item_price"]);
                         }  
                     ?>  
                     <tr>  
                         <td colspan="3" align="right">Total</td>  
                         <td align="right">$ <?php echo number_format($total, 2); ?></td>  
-                        <td></td>   
+                        <td><input type="submit" name="checkout" class="btn btn-primary btn-md btn-block" value="Check Out"/></td>
                     </tr>  
                     <?php  
                     }  
                     ?>  
-                </table>  
+                </table>
+                <?php 
+                if(isset($_POST['checkout'])){
+                    $dt = date("Y-m-d");
+                    //inserting into tbl_order
+                    $query2 = "INSERT INTO tbl_order(`date`,priceTotal,clientId) VALUES ('$dt','$total','$_SESSION[id]')";
+
+                    $result = mysqli_query($conn, $query2)
+                    or die("Error in query: ". mysqli_error($conn));
+
+                    $orderId = mysqli_insert_id($conn);
+                   
+                    //inserting into tbl_order_list
+                   foreach($_SESSION["shopping_cart"] as $keys => $values)  
+                        {
+                            $query3 = "INSERT INTO tbl_order_list(orderId,productId)
+                            VALUES ('$orderId', '$values[item_id]')";
+
+                            $result = mysqli_query($conn, $query3)
+                            or die("Error in query: ". mysqli_error($conn));
+                        }//end of foreach
+                    unset($_SESSION["shopping_cart"]);
+                    header("Location: ordersuccess.php");
+                }//end of if isset
+                ob_end_flush();//Used to avoid headers error
+                ?>
+                </form>
         </div>  
     </div>  
 <br />
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </body>
