@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: May 10, 2018 at 08:35 PM
+-- Generation Time: May 17, 2018 at 09:22 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -46,7 +46,8 @@ CREATE TABLE `tbl_client` (
 
 INSERT INTO `tbl_client` (`clientId`, `name`, `surname`, `email`, `password`, `address`, `phone`, `city`, `country`) VALUES
 (1, 'Owen', 'Magri', 'testemail@gmail.com', 'pass1234', '40, Random Address', 12345678, 'Mosta', 'Malta'),
-(2, 'Jake', 'Salerno', 'salerno@gmail.com', '1234password', '40, address', 21345678, 'Pieta', 'Malta');
+(2, 'Jake', 'Salerno', 'salerno@gmail.com', '1234password', '40, address', 21345678, 'Pieta', 'Malta'),
+(3, 'Owen', 'Magri', 'test123@gmail.com', '123', '25,random', 12345578, 'Naxxar', 'Malta');
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,9 @@ CREATE TABLE `tbl_order` (
 
 INSERT INTO `tbl_order` (`orderId`, `date`, `priceTotal`, `clientId`) VALUES
 (2, '2018-05-10', 5.30, 1),
-(3, '2018-05-10', 7.30, 1);
+(3, '2018-05-10', 7.30, 1),
+(4, '2018-05-16', 21.20, 1),
+(5, '2018-05-16', 21.20, 1);
 
 -- --------------------------------------------------------
 
@@ -90,7 +93,9 @@ INSERT INTO `tbl_order_list` (`orderId`, `productId`) VALUES
 (7, 5),
 (7, 2),
 (9, 2),
-(9, 3);
+(9, 3),
+(4, 1),
+(5, 1);
 
 -- --------------------------------------------------------
 
@@ -157,19 +162,19 @@ ALTER TABLE `tbl_product`
 -- AUTO_INCREMENT for table `tbl_client`
 --
 ALTER TABLE `tbl_client`
-  MODIFY `clientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `clientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
