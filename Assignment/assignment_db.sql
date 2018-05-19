@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: May 17, 2018 at 09:22 PM
+-- Generation Time: May 19, 2018 at 07:53 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -45,9 +45,8 @@ CREATE TABLE `tbl_client` (
 --
 
 INSERT INTO `tbl_client` (`clientId`, `name`, `surname`, `email`, `password`, `address`, `phone`, `city`, `country`) VALUES
-(1, 'Owen', 'Magri', 'testemail@gmail.com', 'pass1234', '40, Random Address', 12345678, 'Mosta', 'Malta'),
-(2, 'Jake', 'Salerno', 'salerno@gmail.com', '1234password', '40, address', 21345678, 'Pieta', 'Malta'),
-(3, 'Owen', 'Magri', 'test123@gmail.com', '123', '25,random', 12345578, 'Naxxar', 'Malta');
+(4, 'Owen', 'Magri', '123@123.com', '123', '40, Random address', 12345678, 'Mosta', 'Malta'),
+(5, 'Jake', 'Salerno', 'salerno@gmail.com', '1234', '30, random', 12345677, 'Naxxar', 'Malta');
 
 -- --------------------------------------------------------
 
@@ -67,10 +66,8 @@ CREATE TABLE `tbl_order` (
 --
 
 INSERT INTO `tbl_order` (`orderId`, `date`, `priceTotal`, `clientId`) VALUES
-(2, '2018-05-10', 5.30, 1),
-(3, '2018-05-10', 7.30, 1),
-(4, '2018-05-16', 21.20, 1),
-(5, '2018-05-16', 21.20, 1);
+(7, '2018-05-19', 26.90, 4),
+(8, '2018-05-19', 28.50, 5);
 
 -- --------------------------------------------------------
 
@@ -88,14 +85,11 @@ CREATE TABLE `tbl_order_list` (
 --
 
 INSERT INTO `tbl_order_list` (`orderId`, `productId`) VALUES
-(5, 2),
-(6, 2),
-(7, 5),
-(7, 2),
-(9, 2),
-(9, 3),
-(4, 1),
-(5, 1);
+(7, 1),
+(7, 11),
+(8, 2),
+(8, 8),
+(8, 13);
 
 -- --------------------------------------------------------
 
@@ -146,7 +140,15 @@ ALTER TABLE `tbl_client`
 -- Indexes for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  ADD PRIMARY KEY (`orderId`);
+  ADD PRIMARY KEY (`orderId`),
+  ADD KEY `clientId` (`clientId`);
+
+--
+-- Indexes for table `tbl_order_list`
+--
+ALTER TABLE `tbl_order_list`
+  ADD KEY `orderId` (`orderId`,`productId`),
+  ADD KEY `productId` (`productId`);
 
 --
 -- Indexes for table `tbl_product`
@@ -162,19 +164,36 @@ ALTER TABLE `tbl_product`
 -- AUTO_INCREMENT for table `tbl_client`
 --
 ALTER TABLE `tbl_client`
-  MODIFY `clientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `clientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tbl_order`
+--
+ALTER TABLE `tbl_order`
+  ADD CONSTRAINT `tbl_order_ibfk_1` FOREIGN KEY (`clientId`) REFERENCES `tbl_client` (`clientId`);
+
+--
+-- Constraints for table `tbl_order_list`
+--
+ALTER TABLE `tbl_order_list`
+  ADD CONSTRAINT `tbl_order_list_ibfk_1` FOREIGN KEY (`orderId`) REFERENCES `tbl_order` (`orderId`),
+  ADD CONSTRAINT `tbl_order_list_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `tbl_product` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -124,7 +124,8 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_ProductButtonActionPerformed
 
     private void CRUDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRUDButtonActionPerformed
-        // TODO add your handling code here:
+        CRUDPage crudPage = new CRUDPage();
+        crudPage.setVisible(true);
     }//GEN-LAST:event_CRUDButtonActionPerformed
 
     /**

@@ -1,3 +1,8 @@
+<?php 
+    require_once("connection.php");
+    $conn = connectToMySQL();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +15,6 @@
 </head>
 <body background="images/background.jpeg">
     <?php require_once("navbar.php"); ?>
-    <?php require_once("connection.php"); ?>
     <div class="container">
             <div class="jumbotron mt-5">
             <h2 class="display-4">Register Account</h2>
@@ -71,13 +75,24 @@
                 if ((!empty($name)) && (!empty($surname)) && (!empty($email)) && (!empty($password)) && (!empty($address))
                 && (!empty($phone)) && (!empty($city)) && (!empty($country))){
 
-                    $conn = connectToMySQL();
+                    $query3 = "SELECT count(*) FROM tbl_client WHERE email = '$email'";
 
-                    $query = "INSERT INTO tbl_client (name, surname, email, password, address, phone, city, country)
-                    VALUES ('$name', '$surname', '$email', '$password', '$address', '$phone', '$city', '$country')";
+                    $result3 = mysqli_query($conn,$query3)
+                    or die("Error in query: ".mysqli_error($conn));
 
-                    $result = mysqli_query($conn, $query)
-                    or die("Error in query: ". mysqli_error($conn));
+                    $row3 = mysqli_fetch_row($result3);
+                    $count3 = $row3[0];
+                    if($count3 > 0){
+                        echo "<script type='text/javascript'>";
+                        echo "document.getElementById('error').innerHTML = 'Email is already taken. Please enter a different Email'";
+                        echo "</script>";
+                    }else{
+                        $query = "INSERT INTO tbl_client (name, surname, email, password, address, phone, city, country)
+                        VALUES ('$name', '$surname', '$email', '$password', '$address', '$phone', '$city', '$country')";
+
+                        $result = mysqli_query($conn, $query)
+                        or die("Error in query: ". mysqli_error($conn));
+                    } 
                 }else{
                     echo "<script type='text/javascript'>";
                     echo "document.getElementById('error').innerHTML = 'Please fill in all the fields'";
